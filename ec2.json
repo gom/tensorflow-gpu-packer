@@ -1,0 +1,39 @@
+{
+  "variables": {
+    "aws_acccess_key": "",
+    "aws_secret_key": "",
+    "subnet_id": "",
+    "security_group_ids":"" 
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_acccess_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-east-1",
+    "source_ami": "ami-fce3c696",
+    "instance_type": "g2.2xlarge",
+    "subnet_id": "{{user `subnet_id`}}",
+    "security_group_ids": ["{{user `security_group_ids`}}"],
+    "ssh_username": "ubuntu",
+    "ssh_timeout": "10m",
+    "ami_name": "gpu_{{timestamp}}"
+  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update",
+        "sudo apt-get upgrade -y",
+        "sudo apt-get -y install software-properties-common",
+        "sudo apt-add-repository ppa:ansible/ansible",
+        "sudo apt-get -y update",
+        "sudo apt-get -y install ansible"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_dir": "ansible",
+      "playbook_file": "ansible/main.yml"
+    }
+  ]
+}

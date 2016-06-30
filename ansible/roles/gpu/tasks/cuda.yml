@@ -1,0 +1,13 @@
+- include_vars: vars/cuda.yml
+- name: download cuda deb
+  get_url: 
+    url={{ cuda_dl_url }}
+    sha256sum={{ csum }}
+    dest={{ cuda_dest }}
+    force=yes
+- name: dpkg cuda deb
+  command: dpkg -i {{ cuda_dest }}
+- name: install cuda
+  apt: pkg={{ item }} force=yes update_cache=yes
+  with_items:
+    - cuda

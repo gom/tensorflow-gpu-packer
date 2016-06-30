@@ -1,0 +1,8 @@
+- name: Setup python3
+  become: yes
+  become_method: sudo
+  include: tasks/python.yml
+- name: Setup Tensorflow
+  become: yes
+  become_method: sudo
+  include: tasks/tensorflow.yml 

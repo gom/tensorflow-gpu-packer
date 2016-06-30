@@ -1,0 +1,11 @@
+- name: install python packages
+  apt: pkg={{ item }} force=yes update_cache=yes
+  with_items:
+    - python3-pip
+    - python3-dev
+    - python3-setuptools
+- name: update pip
+  pip: name={{ item }} executable=pip3
+  with_items:
+    - pip
+    - virtualenv

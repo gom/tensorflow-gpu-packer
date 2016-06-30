@@ -1,0 +1,3 @@
+- include_vars: vars/tensorflow.yml
+- name: install tensorflow
+  pip: name={{ tf_bin_url }} executable=pip3

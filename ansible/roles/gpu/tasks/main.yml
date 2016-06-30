@@ -1,0 +1,8 @@
+- name: Setup CUDA Driver
+  become: yes
+  become_method: sudo
+  include: tasks/cuda.yml
+- name: Setup CUDA Toolkit
+  become: yes
+  become_method: sudo
+  include: tasks/cudnn.yml 

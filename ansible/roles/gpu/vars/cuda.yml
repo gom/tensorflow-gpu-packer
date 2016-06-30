@@ -1,0 +1,3 @@
+cuda_dl_url: http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.5-18_amd64.deb
+csum: d8b208458b399832c312609a00074ba5858182d128c825fc55a6a35d0a5a4c62
+cuda_dest: /tmp/cuda.deb

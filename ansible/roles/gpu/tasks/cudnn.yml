@@ -1,0 +1,13 @@
+- include_vars: vars/cudnn.yml
+- name: unarchive cudnn
+  unarchive: src={{ cudnn_archive }} dest=/tmp/
+- name: install cudnn/lib64
+  shell: cp /tmp/cuda/lib64/libcudnn* /usr/local/cuda/lib64/
+- name: install cudnn/include
+  shell: cp /tmp/cuda/include/cudnn.h /usr/local/cuda/include/
+- name: Change mod
+  shell: chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+- name: set env
+  shell: echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"' >> {{ shell_profile }}
+- name: set CUDA_HOME
+  shell: echo 'export CUDA_HOME=/usr/local/cuda' >> {{ shell_profile }}
