@@ -9,5 +9,5 @@ Please see: https://www.tensorflow.org/versions/master/get_started/os_setup.html
 ```
 $ brew install packer
 $ cd $PATH_TO_THIS
-$ packer build -var-file=aws.json ec2.yml
+$ packer build -var-file=aws.json ec2.json
 ```

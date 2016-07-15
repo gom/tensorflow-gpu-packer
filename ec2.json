@@ -16,24 +16,36 @@
     "security_group_ids": ["{{user `security_group_ids`}}"],
     "ssh_username": "ubuntu",
     "ssh_timeout": "10m",
-    "ami_name": "gpu_{{timestamp}}"
+    "ami_name": "gpu_{{timestamp}}",
+    "ami_block_device_mappings": [
+      {
+        "device_name": "/dev/sda1",
+        "volume_size": 16,
+        "volume_type": "gp2",
+        "delete_on_termination": true
+      }
+    ]
   }],
   "provisioners": [
     {
       "type": "shell",
       "inline": [
-        "sudo apt-get update",
-        "sudo apt-get upgrade -y",
-        "sudo apt-get -y install software-properties-common",
-        "sudo apt-add-repository ppa:ansible/ansible",
         "sudo apt-get -y update",
-        "sudo apt-get -y install ansible"
+        "sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade",
+        "sudo DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade"
       ]
     },
     {
-      "type": "ansible-local",
-      "playbook_dir": "ansible",
+      "type": "ansible",
       "playbook_file": "ansible/main.yml"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo shutdown -r now",
+        "sleep 60"
+      ],
+      "start_retry_timeout": "10m"
     }
   ]
 }

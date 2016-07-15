@@ -10,4 +10,5 @@
 - name: install cuda
   apt: pkg={{ item }} force=yes update_cache=yes
   with_items:
+    - linux-image-extra-virtual
     - cuda

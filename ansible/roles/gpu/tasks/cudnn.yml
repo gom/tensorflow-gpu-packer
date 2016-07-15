@@ -8,6 +8,6 @@
 - name: Change mod
   shell: chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 - name: set env
-  shell: echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"' >> {{ shell_profile }}
+  shell: echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"' >> {{ ansible_env.HOME }}/{{ shell_profile }}
 - name: set CUDA_HOME
-  shell: echo 'export CUDA_HOME=/usr/local/cuda' >> {{ shell_profile }}
+  shell: echo 'export CUDA_HOME=/usr/local/cuda' >> {{ ansible_env.HOME }}/{{ shell_profile }}

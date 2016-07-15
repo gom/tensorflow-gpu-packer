@@ -1,0 +1,7 @@
+- name: Setup develop environment
+  apt: pkg={{ item }} force=yes update_cache=yes
+  with_items:
+    - language-pack-ja
+    - git
+    - vim
+    - tmux
